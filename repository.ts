@@ -1,10 +1,10 @@
-import { create, getNumericDate } from "./deps.ts";
+import { Algorithm, create, getNumericDate } from "./deps.ts";
 import { AuthRepository, Configuration } from "./types.ts";
 
 export type RepositoryDependencies = { configuration: Configuration };
 
 const defaultConfiguration: Configuration = {
-  algorithm: "HS512",
+  algorithm: "HS512" as Algorithm,
   key: "SET-YOUR-KEY",
   tokenExpirationInSeconds: 120,
 };
