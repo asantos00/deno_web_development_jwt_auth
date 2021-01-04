@@ -1,10 +1,10 @@
-import { Algorithm, Jose, makeJwt, Payload, setExpiration } from "./deps.ts";
+import { create, getNumericDate } from "./deps.ts";
 import { AuthRepository, Configuration } from "./types.ts";
 
 export type RepositoryDependencies = { configuration: Configuration };
 
 const defaultConfiguration: Configuration = {
-  algorithm: "HS512" as Algorithm,
+  algorithm: "HS512",
   key: "SET-YOUR-KEY",
   tokenExpirationInSeconds: 120,
 };
@@ -52,17 +52,15 @@ export class Repository implements AuthRepository {
    * @param userId the userId to generate the token for
    */
   async generateToken(userId: string) {
-    const payload: Payload = {
+    const payload = {
       iss: "museums",
-      exp: setExpiration(this.configuration.tokenExpirationInSeconds),
+      exp: getNumericDate(this.configuration.tokenExpirationInSeconds),
       user: userId,
     };
-    const header: Jose = {
-      alg: this.configuration.algorithm,
-      typ: "JWT",
-    };
-    const token = await makeJwt(
-      { key: this.configuration.key, header, payload },
+    const token = await create(
+      { alg: this.configuration.algorithm, typ: "JWT" },
+      payload,
+      this.configuration.key,
     );
 
     return token;
