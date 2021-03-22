@@ -1,3 +1,5 @@
-# getting_started_with_deno_jwt_auth
+# deno_web_development_jwt_auth
 
-Getting started with Deno book from Packtpub
+https://github.com/PacktPublishing/Deno-Web-Development
+ 
+Created on Chapter10 of Deno Web Development book from Alexandre Portela dos Santos with PacktPub (https://deno-web-development.com).
